@@ -4,7 +4,8 @@ import {
   createUser,
   updateUserData,
   deleteUserData,
-} from "../controllers/userController.js"; // Import controller functions
+} from "../controller/user.controller.js"; // Import controller functions
+import checkUser from "../middleware/checkuser.middleware.js"; // Import your middleware
 
 const userRoute = Router();
 

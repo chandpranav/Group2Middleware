@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
 const getUserData = async (req, res) => {
   try {
     const email = req.params.id;
-    const user = await User.findOne({ email });
+    const user = await user.findOne({ email });
     if (!user) {
       return res.status(404).json({
         status: "fail",
@@ -94,6 +94,9 @@ const deleteUserData = async (req, res) => {
     });
   }
 };
+
+// Export the functions
+export { createUser, getUserData, updateUserData, deleteUserData };
 
 /*
 Controller has two parts
