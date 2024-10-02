@@ -1,15 +1,99 @@
-import Router from "express"
+import Router from "express";
 
+const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        user: newUser,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
 
-const getUserData = async() => {
-    try {
-        const email = req.params.id;
-        const user = await user.find({ email});
-        res.status(200).json({user});
-    } catch(err) {
-        console.log(err);
+const getUserData = async (req, res) => {
+  try {
+    const email = req.params.id;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
     }
-}
+    res.status(200).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+const updateUserData = async (req, res) => {
+  try {
+    const email = req.params.id;
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      req.body,
+      { new: true, runValidators: true } // `new: true` returns the updated document
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: updatedUser,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+const deleteUserData = async (req, res) => {
+  try {
+    const email = req.params.id;
+    const deletedUser = await User.findOneAndDelete({ email });
+
+    if (!deletedUser) {
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
 
 /*
 Controller has two parts

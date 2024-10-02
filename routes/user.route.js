@@ -1,15 +1,17 @@
-import { Router } from "express"
+import { Router } from "express";
+import {
+  getUserData,
+  createUser,
+  updateUserData,
+  deleteUserData,
+} from "../controllers/userController.js"; // Import controller functions
 
-const userRoute = Router()
+const userRoute = Router();
 
-userRoute.get("/get-user/:id", getUserData); /*async (req,res) => {
-    try {
-        const email = req.params.id;
-        const user = await user.find({ email});
-        res.status(200).json({user});
-    } catch(err) {
-        console.log(err);
-    }
-})*/
+// Define all the routes for user-related operations
+userRoute.get("/get-user/:id", getUserData); // Read
+userRoute.post("/api/v1/users", createUser); // Create
+userRoute.patch("/api/v1/users/:id", updateUserData); // Update
+userRoute.delete("/api/v1/users/:id", deleteUserData); // Delete
 
 export default userRoute;
