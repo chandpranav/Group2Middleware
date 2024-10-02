@@ -1,6 +1,6 @@
 import Router from "express";
 
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
     res.status(201).json({
@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUserData = async (req, res) => {
+export const getUserData = async (req, res) => {
   try {
     const email = req.params.id;
     const user = await user.findOne({ email });
@@ -41,7 +41,7 @@ const getUserData = async (req, res) => {
   }
 };
 
-const updateUserData = async (req, res) => {
+export const updateUserData = async (req, res) => {
   try {
     const email = req.params.id;
     const updatedUser = await User.findOneAndUpdate(
@@ -71,7 +71,7 @@ const updateUserData = async (req, res) => {
   }
 };
 
-const deleteUserData = async (req, res) => {
+export const deleteUserData = async (req, res) => {
   try {
     const email = req.params.id;
     const deletedUser = await User.findOneAndDelete({ email });
