@@ -1,0 +1,20 @@
+{
+  "name": "cpsc449_backenddev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Diego Vela",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongob": "^1.0.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3",
+    "npm": "^10.8.3"
+  }
+}
