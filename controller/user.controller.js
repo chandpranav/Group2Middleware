@@ -1,7 +1,10 @@
 import Router from "express";
+import User from "../model/user.js"; // Import the User model
 
+// Create a user
 const createUser = async (req, res) => {
   try {
+    console.log("creating a user")
     const newUser = await User.create(req.body);
     res.status(201).json({
       status: "success",
@@ -17,16 +20,19 @@ const createUser = async (req, res) => {
   }
 };
 
+// Get user data by email
 const getUserData = async (req, res) => {
   try {
-    const email = req.params.id;
-    const user = await user.findOne({ email });
+    const email = req.params.email; // Use a more descriptive parameter name
+    const user = await User.findOne({ email });
+    
     if (!user) {
       return res.status(404).json({
         status: "fail",
         message: "User not found",
       });
     }
+    
     res.status(200).json({
       status: "success",
       data: {
@@ -41,9 +47,10 @@ const getUserData = async (req, res) => {
   }
 };
 
+// Update user data by email
 const updateUserData = async (req, res) => {
   try {
-    const email = req.params.id;
+    const email = req.params.email; // Use a more descriptive parameter name
     const updatedUser = await User.findOneAndUpdate(
       { email },
       req.body,
@@ -71,9 +78,10 @@ const updateUserData = async (req, res) => {
   }
 };
 
+// Delete user data by email
 const deleteUserData = async (req, res) => {
   try {
-    const email = req.params.id;
+    const email = req.params.email; // Use a more descriptive parameter name
     const deletedUser = await User.findOneAndDelete({ email });
 
     if (!deletedUser) {
@@ -97,19 +105,3 @@ const deleteUserData = async (req, res) => {
 
 // Export the functions
 export { createUser, getUserData, updateUserData, deleteUserData };
-
-/*
-Controller has two parts
-    High level code
-    Low level Logic/Services/Modular Code
-
-Create a folder called services
-    user.service.js
-
-    import user from "../model/user"
-    
-    getUserbyEmail function
-        const user = await user.find({email});
-
-    in the controller we can use const user = getUserbyemail(email);
-*/
