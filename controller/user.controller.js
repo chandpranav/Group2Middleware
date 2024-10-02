@@ -96,7 +96,7 @@ export const deleteUserData = async (req, res) => {
 };
 
 // Export the functions
-export { createUser, getUserData, updateUserData, deleteUserData };
+// export { createUser, getUserData, updateUserData, deleteUserData };
 
 /*
 Controller has two parts
