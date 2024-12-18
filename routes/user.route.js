@@ -10,9 +10,9 @@ import checkUser from "../middleware/checkuser.middleware.js"; // Import your mi
 const userRoute = Router();
 
 // Define all the routes for user-related operations
-userRoute.get("/get-user/:id", getUserData); // Read
-userRoute.post("/api/v1/users", createUser); // Create
-userRoute.patch("/api/v1/users/:id", updateUserData); // Update
-userRoute.delete("/api/v1/users/:id", deleteUserData); // Delete
+userRoute.get("/:email", checkUser, getUserData); // Read user by email
+userRoute.post("/", createUser); // Create a new user
+userRoute.patch("/:email", updateUserData); // Update user by email
+userRoute.delete("/:email", deleteUserData); // Delete user by email
 
 export default userRoute;
